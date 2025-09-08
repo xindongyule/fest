@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员登录 - 小南资源库</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <!-- 背景动画 -->
+        <div class="background-animation">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+            <div class="floating-shape shape-5"></div>
+        </div>
+
+        <!-- 登录表单 -->
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>管理员登录</h1>
+                </div>
+                <p class="subtitle">请输入您的凭据以访问后台管理系统</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                        用户名
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="请输入用户名" 
+                        required 
+                        autocomplete="username"
+                        maxlength="50"
+                    >
+                    <div class="input-border"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                        密码
+                    </label>
+                    <div class="password-input">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="请输入密码" 
+                            required 
+                            autocomplete="current-password"
+                            maxlength="100"
+                        >
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="input-border"></div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        记住我（7天）
+                    </label>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">登录</span>
+                    <span class="btn-loader">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+
+                <div class="login-help">
+                    <p class="help-text">
+                        <i class="fas fa-info-circle"></i>
+                        如果忘记密码，请联系系统管理员
+                    </p>
+                </div>
+            </form>
+
+            <!-- 安全提示 -->
+            <div class="security-notice">
+                <div class="notice-header">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>安全提示</span>
+                </div>
+                <ul class="notice-list">
+                    <li>请确保在安全的网络环境中访问</li>
+                    <li>登录失败超过5次将被临时锁定</li>
+                    <li>会话将在30分钟无操作后自动过期</li>
+                    <li>请及时退出登录以保护账户安全</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 返回主站链接 -->
+        <div class="back-to-site">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                返回主站
+            </a>
+        </div>
+
+        <!-- 版权信息 -->
+        <div class="footer">
+            <p>&copy; 2024 小南资源库. 保留所有权利.</p>
+        </div>
+    </div>
+
+    <!-- 错误消息提示 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- 安全验证对话框 -->
+    <div class="modal" id="securityModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-shield-check"></i>
+                    安全验证
+                </h3>
+            </div>
+            <div class="modal-body">
+                <p class="security-message">
+                    检测到多次登录失败，请完成以下验证：
+                </p>
+                <div class="captcha-container">
+                    <div class="captcha-question" id="captchaQuestion"></div>
+                    <input type="text" id="captchaAnswer" placeholder="请输入答案" maxlength="10">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelCaptcha">取消</button>
+                <button class="btn btn-primary" id="submitCaptcha">验证</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html> 

@@ -1,0 +1,202 @@
+🔧 超简单修改指南
+====================
+
+✅ 无需配置文件，无需服务器，直接修改 HTML 文件即可！
+
+📝 如何修改内容：
+==================
+
+1️⃣ 修改个人信息
+-----------------
+打开 index.html 文件，找到以下位置：
+
+📍 修改用户名：
+找到: <h1 class="profile-name" id="profileName">小南</h1>
+修改: 把"小南"改成你的名字
+
+📍 修改个人简介：
+找到: <p class="profile-bio" id="profileBio">最新资讯，尽在掌握</p>
+修改: 把"最新资讯，尽在掌握"改成你的简介
+
+📍 修改头像：
+找到: <img src="Tx.jpg" alt="头像" class="avatar" id="avatarImg">
+修改: 把"Tx.jpg"改成你的头像文件名，或者直接替换 Tx.jpg 文件
+
+2️⃣ 修改统计数据
+-----------------
+📍 关注者数量：
+找到: <span class="stat-number">1.2K</span>
+修改: 把"1.2K"改成你的关注者数量
+
+📍 点击量：
+找到: <span class="stat-number">856</span>
+修改: 把"856"改成你的点击量
+
+📍 链接数：
+找到: <span class="stat-number">3</span>
+修改: 把"3"改成你的链接数量
+
+3️⃣ 修改链接
+-----------------
+每个链接的格式如下：
+<a href="https://example.com/hot-news" class="main-link gradient-1" data-analytics="官网">
+    <i class="fas fa-globe"></i>
+    <span>惊天 大瓜</span>
+    <i class="fas fa-arrow-right arrow"></i>
+</a>
+
+📍 修改链接地址：
+把 href="https://example.com/hot-news" 中的网址改成你的链接
+
+📍 修改链接标题：
+把 <span>惊天 大瓜</span> 中的文字改成你的标题
+
+📍 修改图标：
+把 <i class="fas fa-globe"></i> 中的 fa-globe 改成其他图标
+
+4️⃣ 添加新链接
+-----------------
+复制整个 <a>...</a> 标签，然后修改内容
+
+🎨 可用的样式：
+gradient-1 (蓝紫色)
+gradient-2 (橙红色) 
+gradient-3 (绿青色)
+
+🎨 常用图标：
+fas fa-heart (爱心)
+fas fa-music (音乐)
+fas fa-camera (相机)
+fas fa-envelope (邮件)
+fas fa-phone (电话)
+fas fa-star (星星)
+fas fa-shopping-cart (购物车)
+
+5️⃣ 修改二维码内容
+-----------------
+打开 simple-script.js 文件，找到顶部的设置区域：
+
+📍 修改二维码内容：
+找到: content: window.location.href,
+修改: 把 window.location.href 改成你想要的内容
+
+🔗 常见二维码内容示例：
+content: "https://www.baidu.com",           // 网址
+content: "你的微信号",                      // 文字
+content: "weixin://",                       // 微信
+content: "tel:13800138000",                 // 电话
+content: "mailto:your@email.com",           // 邮箱
+
+📍 修改二维码样式：
+size: 150,              // 修改尺寸（像素）
+color: '#667eea',       // 修改颜色（16进制颜色代码）
+background: 'white'     // 修改背景色
+
+6️⃣ 修改背景图片
+-----------------
+📍 更换背景图片：
+1. 将你的图片文件重命名为 bj.jpg
+2. 替换现有的 bj.jpg 文件
+3. 或者修改 styles.css 文件中的图片路径
+
+📍 在 styles.css 中找到：
+找到: background: url('bj.jpg') center/cover no-repeat,
+修改: 把 'bj.jpg' 改成你的图片文件名
+
+📍 调整背景图片大小和位置：
+center/cover - 居中并覆盖整个区域（推荐）
+center/contain - 居中但完整显示图片
+top/cover - 顶部对齐并覆盖
+bottom/cover - 底部对齐并覆盖
+left/cover - 左对齐并覆盖
+right/cover - 右对齐并覆盖
+
+📍 找到具体位置（在 styles.css 第92-102行左右）：
+/* 背景图片层 */
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        url('bj.jpg') center/cover no-repeat,
+        linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    z-index: -2;
+    border-radius: var(--radius-large);
+}
+
+7️⃣ 调整背景透明度
+-----------------
+📍 桌面端透明度调整（在 styles.css 第107-117行左右）：
+找到这段代码：
+/* 半透明遮罩层 */
+.profile-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.15);  ← 修改这里的 0.15
+    z-index: -1;
+    border-radius: var(--radius-large);
+}
+
+📍 移动端透明度调整（在 styles.css 第753行左右）：
+找到这段代码：
+.profile-container::after {
+    background: rgba(255, 255, 255, 0.25);  ← 修改这里的 0.25
+}
+
+🎨 透明度数值说明：
+0.05 = 5% 透明（几乎完全透明）
+0.15 = 15% 透明（当前桌面端设置）
+0.25 = 25% 透明（当前移动端设置）
+0.50 = 50% 透明（半透明）
+0.80 = 80% 透明（大部分遮挡）
+
+📍 如何调整：
+- 数值越小，背景图片越清晰
+- 数值越大，背景图片越朦胧
+- 建议桌面端：0.10-0.20
+- 建议移动端：0.20-0.30
+
+8️⃣ 保存和查看
+-----------------
+1. 保存 index.html 文件（如果修改了HTML）
+2. 保存 simple-script.js 文件（如果修改了二维码）
+3. 保存 styles.css 文件（如果修改了样式）
+4. 双击 index.html 文件用浏览器打开
+5. 刷新页面查看效果
+
+🔧 常见问题：
+=============
+
+Q: 修改后没有变化？
+A: 按 Ctrl+F5 强制刷新浏览器缓存
+
+Q: 头像不显示？
+A: 确保头像文件和 index.html 在同一个文件夹中
+
+Q: 背景图片不显示？
+A: 1. 确保图片文件和 index.html 在同一个文件夹中
+   2. 图片格式建议使用 jpg、png、webp
+   3. 检查图片文件名是否正确（注意大小写）
+
+Q: 背景图片太模糊或太清晰？
+A: 调整透明度数值，桌面端建议 0.10-0.20，移动端建议 0.20-0.30
+
+Q: 背景图片显示不完整？
+A: 修改 center/cover 为 center/contain 可以完整显示图片
+
+Q: 链接无法跳转？
+A: 确保链接以 http:// 或 https:// 开头
+
+Q: 图标不显示？
+A: 确保使用正确的 Font Awesome 图标类名
+
+🎉 完成！
+=========
+现在你可以自由修改网页内容了，无需任何技术背景！ 

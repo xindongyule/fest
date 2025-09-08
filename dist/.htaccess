@@ -1,0 +1,58 @@
+# 小南资源库 - 安全配置
+
+# 禁用目录浏览
+Options -Indexes
+
+# 保护管理页面
+<Files "admin.html">
+    # 需要身份验证（如果配置了Apache认证）
+    # AuthType Basic
+    # AuthName "管理区域"
+    # AuthUserFile /path/to/.htpasswd
+    # Require valid-user
+    
+    # 或者重定向到登录页
+    RewriteEngine On
+    RewriteCond %{HTTP_REFERER} !login\.html$ [NC]
+    RewriteCond %{QUERY_STRING} !auth=true [NC]
+    RewriteRule ^admin\.html$ /login.html [R=302,L]
+</Files>
+
+# 保护敏感文件
+<FilesMatch "\.(md|txt|log|bak|backup)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# 防止直接访问JavaScript文件（可选）
+<FilesMatch "\.(js)$">
+    # 设置适当的MIME类型
+    Header set Content-Type "application/javascript"
+    
+    # 防止嵌入到其他网站
+    Header always set X-Frame-Options "DENY"
+</FilesMatch>
+
+# 安全头部
+<IfModule mod_headers.c>
+    # 防止XSS攻击
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # 防止MIME类型嗅探
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # 防止页面被嵌入iframe
+    Header always set X-Frame-Options "DENY"
+    
+    # 内容安全策略
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';"
+</IfModule>
+
+# 强制HTTPS（如果支持SSL）
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 隐藏服务器信息
+ServerTokens Prod
+ServerSignature Off 
